@@ -6,13 +6,35 @@ public class convolution {
     convolution(){
 
     }
-    public int[] convolve(int[] a, int[] b){
-        int[] c = new int[a.length];
-        for(int ae : a){
-            for(int be: b){
-                ae*be
+    //from this stack overflow thread https://stackoverflow.com/questions/31701089/vector-convolution-calculating-the-index-of-a-neighbour-element
+    public static int[] convolve(int[] image, int[] kernel)
+    {
+        int[] output = new int[image.length];
+
+        // loop through image
+        for(int i = 0; i < image.length; i++)
+        {
+            System.out.println("Compute output["+i+"]");
+            int outputValue = 0;
+
+            // loop through kernel
+            for(int j = 0; j < kernel.length; j++)
+            {
+                int neighbour = i + j - (kernel.length / 2);
+
+                // discard out of bound neighbours
+                if (neighbour >= 0 && neighbour < image.length)
+                {
+                    int imageValue = image[neighbour];
+                    int kernelValue = kernel[j];
+                    outputValue += imageValue * kernelValue;
+                    System.out.println("image["+neighbour+"] and kernel["+j+"]");
+                }
             }
+
+            output[i] = outputValue;
         }
-        return new int[0];
+
+        return output;
     }
 }

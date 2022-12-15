@@ -36,14 +36,13 @@ public class polynomial {
     public polynomial multiply(polynomial b){
         int[] a_val = this.getVal();
         int[] b_val = b.getVal();
-        int[] c_val = new int[a_val.length + b_val.length];
+        int[] c_val = new int[a_val.length + b_val.length -1]; //fix through reference of this stack overflow article https://www.geeksforgeeks.org/multiply-two-polynomials-2/
 
         for(int i = 0; i<a_val.length; i++){
             int ae = a_val[i];
             for(int j = 0; j<b_val.length; j++){
                 int be = b_val[j];
-                c_val[i+j] = ae*be;
-
+                c_val[i+j] += ae*be;
             }
         }
 
